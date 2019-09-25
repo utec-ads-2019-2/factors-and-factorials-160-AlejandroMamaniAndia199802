@@ -1,56 +1,29 @@
-#include <iostream>
-#include <math.h>
-
-
-
-#include <bits/stdc++.h>
-
+#include<cstdio>
 using namespace std;
 
-int primes[25] = {
-        2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
-        41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97
-};
+int primes[25]={2,3,5,7,11,13,17,19,23,29,31,37,41,
+               43,47,53,59,61,67,71,73,79,83,89,97};
 
-int main(int argc, char* argv[])
-{
-    int n;
-    while (cin >> n, n)
-    {
-        cout << setw(3) << right << n;
-        cout << "! =";
-        int counter[26] = { 0 };
-        for (int i = 2; i <= n; i++)
-        {
-            int m = i;
-            while (m > 1)
-            {
-                for (int j = 0; j < 26; j++)
-                {
-                    if (m % primes[j] == 0)
-                    {
-                        counter[j]++;
-                        m /= primes[j];
-                        break;
-                    }
-                }
+int main(){
+    int n,value,counter,i;
+    while(scanf("%d",&n)==1){
+        if(n==0)
+            break;
+        printf("%3d! =",n);
+        for(i=0;i<25;i++){
+            counter=0;
+            value=primes[i];
+            while(n/value){
+                counter+=(n/value);
+                value*=primes[i];
             }
-        }
-
-        int last;
-        for (last = 25; last >= 0; last--)
-            if (counter[last] > 0)
+            if(counter==0)
                 break;
-
-        int start = 0;
-        while (start <= min(14, last))
-            cout << setw(3) << right << counter[start++];
-        if (start <= last)
-            cout << endl << string(6, ' ');
-        while (start <= last)
-            cout << setw(3) << right << counter[start++];
-        cout << endl;
+            if(i==15)
+                printf("\n      ");
+            printf("%3d",counter);
+        }
+        printf("\n");
     }
-
     return 0;
 }
